@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Prix</th>
+            <th>Date Création</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (oeuvre of oeuvres; track oeuvre.idOeuvre) {
+            <tr>
+              <td>{{ oeuvre.idOeuvre }}</td>
+              <td>{{ oeuvre.titreOeuvre }}</td>
+              <td>{{ oeuvre.prixOeuvre }}</td>
+              <td>{{ oeuvre.dateCreation | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <a class="btn btn-danger me-2" (click)="supprimerOeuvre(oeuvre)">Supprimer</a>
+                <a class="btn btn-success" [routerLink]="['/updateOeuvre', oeuvre.idOeuvre]">Modifier</a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
