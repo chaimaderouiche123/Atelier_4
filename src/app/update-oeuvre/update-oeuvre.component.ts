@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Oeuvre } from '../model/oeuvre.model';
+import { Genre } from '../model/genre.model';
 import { OeuvreService } from '../services/oeuvre.service';
 
 @Component({
@@ -15,6 +16,8 @@ import { OeuvreService } from '../services/oeuvre.service';
 export class UpdateOeuvreComponent implements OnInit {
 
   currentOeuvre = new Oeuvre();
+  genres!: Genre[];
+  updatedIdGenre!: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,12 +26,17 @@ export class UpdateOeuvreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.genres = this.oeuvreService.listeGenres();
     this.currentOeuvre = this.oeuvreService.consulterOeuvre(
       this.activatedRoute.snapshot.params['id']
     );
+    if (this.currentOeuvre.genre) {
+      this.updatedIdGenre = this.currentOeuvre.genre.idGenre;
+    }
   }
 
   updateOeuvre() {
+    this.currentOeuvre.genre = this.oeuvreService.consulterGenre(this.updatedIdGenre);
     this.oeuvreService.updateOeuvre(this.currentOeuvre);
     this.router.navigate(['oeuvres']);
   }

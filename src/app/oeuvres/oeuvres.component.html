@@ -8,6 +8,7 @@
             <th>Titre</th>
             <th>Prix</th>
             <th>Date Création</th>
+            <th>Genre</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -18,6 +19,7 @@
               <td>{{ oeuvre.titreOeuvre }}</td>
               <td>{{ oeuvre.prixOeuvre }}</td>
               <td>{{ oeuvre.dateCreation | date:'dd/MM/yyyy' }}</td>
+              <td>{{ oeuvre.genre?.nomGenre }}</td>
               <td>
                 <a class="btn btn-danger me-2" (click)="supprimerOeuvre(oeuvre)">Supprimer</a>
                 <a class="btn btn-success" [routerLink]="['/updateOeuvre', oeuvre.idOeuvre]">Modifier</a>

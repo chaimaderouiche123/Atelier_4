@@ -23,6 +23,15 @@
       <input type="date" [ngModel]="currentOeuvre.dateCreation | date:'yyyy-MM-dd'" (ngModelChange)="currentOeuvre.dateCreation = $event" name="dateCreation" class="form-control">
     </div>
 
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label class="form-label">Genre</label>
+      <select class="form-control form-control-lg" id="idGenre" name="idGenre" [(ngModel)]="updatedIdGenre">
+        @for(genre of genres; track genre.idGenre) {
+          <option [value]="genre.idGenre">{{ genre.nomGenre }}</option>
+        }
+      </select>
+    </div>
+
     <div class="mt-2">
       <button type="button" (click)="updateOeuvre()" class="btn btn-success">Modifier</button>
     </div>
